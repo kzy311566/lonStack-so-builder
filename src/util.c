@@ -282,8 +282,12 @@ void put_fake_fops_table(unsigned char *p, size_t off) {
         fake_w0 + FAKE_WAITER_PI_TREE_ENTRY_OFF);
   put64(p, off + FOPS_READ_OFF, 0);
   put64(p, off + FOPS_WRITE_OFF, 0);
+#ifdef CONFIGFS_READ_ITER
   put64(p, off + FOPS_READ_ITER_OFF, text_addr(CONFIGFS_READ_ITER));
+#endif
+#ifdef CONFIGFS_BIN_WRITE_ITER
   put64(p, off + FOPS_WRITE_ITER_OFF, text_addr(CONFIGFS_BIN_WRITE_ITER));
+#endif
   put64(p, off + FOPS_IOCTL_OFF, text_addr(ASHMEM_IOCTL));
   put64(p, off + FOPS_COMPAT_IOCTL_OFF, text_addr(ASHMEM_COMPAT_IOCTL));
   put64(p, off + FOPS_MMAP_OFF, text_addr(ASHMEM_MMAP));

@@ -195,8 +195,12 @@ int refresh_fake_fops_text(int fd) {
     size_t off;
     uint64_t value;
   } slots[] = {
+#ifdef CONFIGFS_READ_ITER
     {FOPS_READ_ITER_OFF, text_addr(CONFIGFS_READ_ITER)},
+#endif
+#ifdef CONFIGFS_BIN_WRITE_ITER
     {FOPS_WRITE_ITER_OFF, text_addr(CONFIGFS_BIN_WRITE_ITER)},
+#endif
     {FOPS_IOCTL_OFF, text_addr(ASHMEM_IOCTL)},
     {FOPS_COMPAT_IOCTL_OFF, text_addr(ASHMEM_COMPAT_IOCTL)},
     {FOPS_MMAP_OFF, text_addr(ASHMEM_MMAP)},
